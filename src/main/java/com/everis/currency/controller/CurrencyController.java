@@ -29,4 +29,9 @@ public class CurrencyController {
     public Mono<BootCoin> getCurrencyByName(@PathVariable("name") String name){
         return service.getCurrencyByName(name);
     }
+
+    @PutMapping("/{id}")
+    public Mono<BootCoin> updateCurrency(@PathVariable String id, @RequestBody BootCoin request){
+        return service.updateCurrencyBootcoin(id, request);
+    }
 }

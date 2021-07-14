@@ -37,8 +37,13 @@ public class CurrencyServiceImpl implements CurrencyService {
     }
 
     @Override
-    public Mono<BootCoin> updateCurrencyBootcoin(BootCoin currency) {
-        return null;
+    public Mono<BootCoin> updateCurrencyBootcoin(String id, BootCoin currency) {
+        return repository.findById(UUID.fromString(id)).map(bootCoin -> {
+            bootCoin.setSellCoin((currency.getSellCoin() == null)? bootCoin.getSellCoin(): currency.getSellCoin());
+            bootCoin.setPurchaseCoin((currency.getPurchaseCoin() == null)? bootCoin.getPurchaseCoin(): currency.getPurchaseCoin());
+            bootCoin.setName((currency.getName() == null)? bootCoin.getName(): currency.getName());
+            return bootCoin;
+        }).flatMap(repository::save);
     }
 
 
