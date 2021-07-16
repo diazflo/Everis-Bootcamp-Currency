@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  currency-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: docker-currency-service
+    restart: always
+    ports:
+      - 8089:8089
+    networks:
+      bank_network:
+        aliases:
+          - app_subnet
+        #ipv4_address: 172.20.0.4
+networks:
+  bank_network:
+    name: app_subnet
+    external: true
