@@ -5,6 +5,7 @@ import com.everis.currency.service.CurrencyService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Slf4j
@@ -33,5 +34,10 @@ public class CurrencyController {
     @PutMapping("/{id}")
     public Mono<BootCoin> updateCurrency(@PathVariable String id, @RequestBody BootCoin request){
         return service.updateCurrencyBootcoin(id, request);
+    }
+
+    @GetMapping
+    public Flux<BootCoin> getAllCurrency(){
+        return service.getAllCurrency();
     }
 }
